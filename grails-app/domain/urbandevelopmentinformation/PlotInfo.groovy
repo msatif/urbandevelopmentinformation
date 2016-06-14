@@ -1,52 +1,89 @@
 package urbandevelopmentinformation
 
 class PlotInfo {
-	Long plotId;
-	Long plotAddressId;
-	String plotCode;
-	String plotName;
-	String plotType;
-	String plotNumber;
-	String plotMonzaNumber;
-	String plotDagNumber;
-	String plotMSNumber;
-	String plotCSNumber;
-	String plotUtilities;
-	byte[] plotLayoutPicture;
-	byte[] plotUtilityLocationMap;
+	long plId
+	long plAddressId
+	String plCode
+	String plName
+	String plType
+	String plNumber
+	String plMonzaNumber
+	String plCSNumber
+	String plMSNumber
+	Double plTotalArea
+	Double plTotalBuildingCoverArea
+	Double plNumberOfBuilding
+	Double plHeightFromMSL
+	Double plCenterLongitude
+	Double plCenterLatitude
+	byte [] plLayoutPicture
+	byte [] utilityLocationMap
+	String plRemark
 	
+	String toString() {
+		"${plId}-${plAddressId}-${plType}"
+	}
+
+	static hasMany =[ownership:PlotInfoOwnershipInfo,authorizationInfo:PlotInfoAuthorizationInfo, utilityInfo:PlotInfoUtilityInfo,
+		             billingInfo:PlotInfoBillingInfo, paymentInfo:PlotInfoPaymentInfo, buildingInfo:BuildingInfo]
+
     static constraints = {
-		plotAddressId()
-		plotId()
-		plotType()
-		plotCode()
-		plotName()
-		plotMonzaNumber()
-		plotDagNumber()
-		plotMSNumber()
-		plotCSNumber()
-		plotNumber()
-		plotUtilities()
-		plotLayoutPicture()
-		plotUtilityLocationMap()
-	
+		
+		 plId()
+		 plAddressId()
+		 plCode()
+	     plName()
+		 plType()
+		 plNumber()
+		 plMonzaNumber()
+		 plCSNumber()
+		 plMSNumber()
+		 plTotalArea()
+		 plTotalBuildingCoverArea()
+		 plNumberOfBuilding()
+		 plHeightFromMSL()
+		 plCenterLongitude()
+		 plCenterLatitude()
+		 plLayoutPicture()
+		 utilityLocationMap()
+		 plRemark()
+		 ownership()
+		 authorizationInfo()
+		 utilityInfo()
+		 billingInfo()
+		 paymentInfo()
+		 buildingInfo()
+		 
     }
 	
+	
 	static mapping = {
-		table 'plot'
-		plotId column:'pl_id'
-		addressId column:'pl_ad_ad_id'
-		plotCode column:'pl_code'
-		plotName column:'pl_name'
-		plotType column:'pl_type'
-		plotNumber column:'pl_number'
-		plotMonzaNumber column:'pl_mo_num'
-		plotDagNumber column:'pl_dag_num'
-		plotMSNumber column:'pl_ms_num'
-		plotCSNumber column:'pl_cs_num'
-		plotLayoutPicture column:'pl_la_pic'
-		plotUtilityLocationMap column:'pl_ut_lo_map'
-		
-		
+	  table 'plotInfo'
+	  version false
+	 
+ columns {
+	 
+	     plId column:'pl_id'
+		 plAddressId column:'pl_ad_id'
+		 plCode column:'pl_code'
+	     plName column:'pl_name'
+		 plType column:'pl_type'
+		 plNumber column:'pl_number'
+		 plMonzaNumber column:'pl_monza_num'
+		 plCSNumber column:'pl_cs_num'
+		 plMSNumber column:'pl_ms_num'
+		 plTotalArea column:'pl_tot_area'
+		 plTotalBuildingCoverArea column:'pl_tot_bc_area'
+		 plNumberOfBuilding column:'pl_build_num'
+		 plHeightFromMSL column:'pl_height_msl'
+		 plCenterLongitude column:'pl_ce_longitude'
+		 plCenterLatitude column:'pl_ce_latitude'
+		 plLayoutPicture column:'pl_layout_pic'
+		 utilityLocationMap column:'pl_uti_lo_map'
+		 plRemark column:'pl_remark'
+	
 	  }
+  }
+	
+	
 }

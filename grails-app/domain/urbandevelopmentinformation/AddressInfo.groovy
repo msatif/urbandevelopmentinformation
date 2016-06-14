@@ -1,70 +1,122 @@
 package urbandevelopmentinformation
+import urbandevelopmentinformation.UserRegistration
 
 class AddressInfo {
-	
-	
+  String adFirstName
+ String adMiddleName
+ String adLastName
+ Date adBirthDate
+ String adBirthCertificateNumber
+ byte[] adBirthCertificateNumberPic
+ String adNationalIdNumber
+ byte[] adNationalIdNumberPic
+ String adPassportNumber
+ byte[] adPassportNumberPic
+ String adSexStatus
+ String adMobileNumber
+ String adLandNumber
+ String adEMail
+ String adWeb
+ String adWifeOrHaFullName
+ String adWifeOrHusbandNationalId
+ 
+ String adFamilySize
+ String adEducationLevel
+ String adJobId
+ String adJobStatus
+ String adJobPosition
+ String adJobProvider
+ String adJobType
+ Date adJoiningDate
+ 
+ String adFatherFullName
+ String adFatherNationalId
+ String adMotherFullName
+ String adMotherNationalId
+ Long adId
+ 
+ 
+ static hasMany =[addressLocation:AddressLocationInfo]
+ 
 
-   Long addressId;
-	String divisionCode;
-	String divisionName;
-	String districtCode;
-	String districtName;
-	String upzillaCode;
-	String upzillaName;
-	String thanaCode;
-	String thanaName;
-	String wardCode;
-	String wardName;
-	String unionCode;
-	String unionName;
-	String villageCode;
-	String villageName;
-	String postalCodezipCode;
-	String postalNamezipName;
-	String streetCode;
-	String streetName;
-	String streetNumber;
-	String sectionCode;
-	
-	String sectionName;
-	String blockCode
-	String blockName;
-	String houseCode;
-	String houseName;
-	
-	
-	
-	static mapping = {
-		table 'address'
-		addressId column:'ad_id'
-		divisionCode column:'ad_div_code'
-		divisionName column:'ad_div_name'
-		districtCode column:'ad_dis_code'
-		districtName cloumn:'ad_dis_name'
-		upzillaCode column:'ad_up_code'
-		upzillaName column:'ad_up_name'
-		thanaCode column:'ad_th_code'
-		thanaName column:'ad_th_name'
-		wardCode column:'ad_wa_code'
-		wardName column:'ad_wa_name'
-		unionCode column:'ad_un_code'
-		unionName column:'ad_un_name'
-		villageCode column:'ad_vi_code'
-		villageName column:'ad_vi_name'
-		postalCodezipCode column:'ad_zi_code'
-		postalNamezipName column:'ad_zi_name'
-		streetCode column:'ad_st_code'
-		streetName column:'ad_st_name'
-		streetNumber column:'ad_st_num'
-		sectionCode column:'ad_se_code'
-		sectionName column:'ad_se_name'
-		blockCode column:'ad_bl_code'
-		blockName column:'ad_bl_name'
-		houseCode column:'ad_ho_code'
-		houseName column:'ad_ho_name'
-		
-		
-		
-		
-	  }
+    static constraints = {
+  adId()
+  
+  adFirstName()
+  adMiddleName()
+  adLastName()
+  adBirthDate()
+  adBirthCertificateNumber()
+  adBirthCertificateNumberPic()
+  adNationalIdNumber()
+  adNationalIdNumberPic()
+  adPassportNumber()
+  adPassportNumberPic()
+  adSexStatus()
+  adMobileNumber()
+  adLandNumber()
+  adEMail()
+  adWeb()
+  adWifeOrHaFullName()
+  adWifeOrHusbandNationalId()
+  adFamilySize()
+  adEducationLevel()
+  adJobId()
+  adJobStatus()
+  adJobPosition()
+  adJobProvider()
+  adJobType()
+  adJoiningDate()
+  adFatherFullName()
+  adFatherNationalId()
+  adMotherFullName()
+  adMotherNationalId()
+
+    }
+    
+    String toString() {
+        "${adId}"
+    }
+ static mapping = {
+      table 'addressinfo'
+      version false
+  
+ columns {
+  adId column:'ad_id'
+ 
+  adFirstName column:'ad_fir_name'
+  adMiddleName column:'ad_mid_name'
+  adLastName column:'ad_las_name'
+  adBirthDate column:'ad_bir_date'
+  adBirthCertificateNumber column:'ad_bc_num'
+  adBirthCertificateNumberPic column:'ad_bc_num_pic'
+  adNationalIdNumber column:'ad_nid_num'
+  adNationalIdNumberPic column:'ad_nid_pic'
+  adPassportNumber column:'ad_pass_num'
+  adPassportNumberPic column:'ad_pass_num_pic'
+  adSexStatus column:'ad_sex_status'
+  adMobileNumber column:'ad_mo_num'
+  adLandNumber column:'ad_la_num'
+  adEMail column:'ad_email'
+  adWeb column:'ad_web'
+  adWifeOrHaFullName column:'ad_worh_name'
+  adWifeOrHusbandNationalId column:'ad_worh_nid'
+  adFamilySize column:'ad_fa_size'
+  adEducationLevel column:'ad_edu_level'
+  adJobId column:'ad_job_id'
+  adJobStatus column:'ad_job_status'
+  adJobPosition column:'ad_job_pos'
+  adJobProvider column:'ad_job_pro'
+  adJobType column:'ad_job_type'
+  adJoiningDate column:'ad_joi_date'
+  adFatherFullName column:'ad_faf_name'
+  adFatherNationalId column:'ad_fa_nid'
+  adMotherFullName column:'ad_mof_name'
+  adMotherNationalId column:'ad_wo_nid'
+  addressLocation column:'al_ad_id'
+  
+   
+
+      }
+  }
 }

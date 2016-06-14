@@ -1,6 +1,8 @@
 package urbandevelopmentinformation
 
 import java.util.Date;
+import urbandevelopmentinformation.AddressInfo
+import urbandevelopmentinformation.UserRole
 
 class UserRegistration {
  Long userRegistrationId
@@ -17,7 +19,7 @@ class UserRegistration {
   "${userRegistrationfullName}"
  }
  
- static hasMany =[roles:UserRole]
+ static hasMany =[roles:UserRole,addresses:AddressInfo]
 
  static constraints = {
   userRegistrationId()
@@ -29,6 +31,8 @@ class UserRegistration {
   userRegistrationLDate()
   userRegistrationName(unique: true)
   userRegistrationPassword(password: true)
+  roles()
+  addresses()
   
     
  }

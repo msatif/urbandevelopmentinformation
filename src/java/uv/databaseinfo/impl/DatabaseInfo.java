@@ -32,10 +32,14 @@ import java.util.Properties;
 
 
 
+
+
 import liquibase.database.DatabaseConnection;
+import uv.databaseinfo.TO.AddressLocationSearchResultTO;
 import uv.databaseinfo.TO.DatabaseConnectionTO;
 import uv.databaseinfo.TO.DatabaseInfoResultTO;
 import uv.databaseinfo.TO.DatabaseMetadataInfoTO;
+import uv.databaseinfo.TO.RoadSearchParamsTO;
 
 /**
  * @author Shaiful
@@ -98,9 +102,9 @@ public class DatabaseInfo {
 	   Class.forName(prop.getProperty("postgresql_driverClassName"));
 	   // Step 3: Establish Java POSTGRESQL connection
 	   conn = DriverManager.getConnection(
-	   prop.getProperty("postgresql_url_urbandatabase"),
+	   prop.getProperty("postgresql_url_postgres"),
 	   prop.getProperty("postgresql_username_postgres"), 
-	   prop.getProperty("postgresql_password_urbandatabase"));
+	   prop.getProperty("postgresql_password_postgres"));
 	   
 	  
 	  
@@ -141,22 +145,13 @@ public class DatabaseInfo {
 		   // load a properties file
 		   prop.load(input);
 		   // Step 2: Load POSTGRESQL Java driver
-		   Class.forName(prop.getProperty("postgresql_driverClassName"));
+		  Class.forName(prop.getProperty("postgresql_driverClassName"));
 		   // Step 3: Establish Java POSTGRESQL connection
-		   System.out.println(databaseName);
-		   System.out.println(prop.getProperty("postgresql_url"+databaseName));
-		   System.out.println(prop.getProperty("postgresql_url"));
-		   
-		   String url=prop.getProperty("postgresql_url");
-		   String dbName=databaseName;
-		   String completeUrl=String.valueOf("jdbc:postgresql://localhost:5432/"+databaseName);
-		   
-		  
-		   System.out.println( "complete url :"+String.valueOf("jdbc:postgresql://localhost:5432/"+databaseName));
+		
 		   
 		   conn = DriverManager.getConnection(
-				   completeUrl,
-		  // prop.getProperty("postgresql_url"+databaseName),
+			
+		  prop.getProperty("postgresql_url")+databaseName,
 		   prop.getProperty("postgresql_username_postgres"), 
 		   prop.getProperty("postgresql_password_postgres"));
 		   
@@ -187,6 +182,53 @@ public class DatabaseInfo {
 		  return conn;
 		 }
 		
+	
+	public Connection getConnection(String databaseName,String tableName,String propertiesFile) throws Exception {
+		   //Connection connection=null;
+		  Properties prop = new Properties();
+		  FileInputStream input = null;	
+		  
+		  try {
+			   input = new FileInputStream(propertiesFile);
+		   // load a properties file
+		   prop.load(input);
+		   // Step 2: Load POSTGRESQL Java driver
+		  Class.forName(prop.getProperty("postgresql_driverClassName"));
+		   // Step 3: Establish Java POSTGRESQL connection
+		
+		   
+		   conn = DriverManager.getConnection(
+			
+		  prop.getProperty("postgresql_url")+databaseName,
+		   prop.getProperty("postgresql_username_postgres")+ tableName, 
+		   prop.getProperty("postgresql_password_postgres"));
+		   
+		   
+		   if(conn!=null){
+		    return conn;
+		   }
+		   else{
+		    System.out.println("Unable to Connect to Database.");
+		   } 
+		  }
+		  catch (ClassNotFoundException e) {
+		   e.printStackTrace();
+		  } catch (SQLException e) {
+		   System.out.println("Unable to Connect to Database"+e.getMessage());
+		  }
+		  
+		  finally {
+		   if (input != null) {
+		    try {
+		     input.close();
+		    } catch (IOException e) {
+		     e.printStackTrace();
+		    }
+		   }
+		 //  if(conn!=null){conn.close();}
+		     }
+		  return conn;
+		 }
 	
 	
 	
@@ -220,6 +262,40 @@ public class DatabaseInfo {
 		 }
 		 return result;
 		}
+	
+	
+	
+	public DatabaseMetadataInfoTO getDatabaseMetadataInfo(String databaseName,String propertiesFile) throws Exception{
+		
+		 DatabaseMetadataInfoTO result=new DatabaseMetadataInfoTO();
+		 try{
+		  conn=(Connection)getConnection(databaseName,propertiesFile);
+		  
+		  if(conn!=null){
+		   result.setSchemaName(conn.getCatalog());
+		   result.setDriverClass(conn.getMetaData().getDriverName());
+		   result.setDatabaseMajorVersion(String.valueOf(conn.getMetaData().getDatabaseMajorVersion()));
+		   result.setDatabaseMinorVersion(String.valueOf(conn.getMetaData().getDatabaseMinorVersion()));
+		   result.setDatabaseProductName(conn.getMetaData().getDatabaseProductName());
+		   result.setDatabaseProductVersion(conn.getMetaData().getDatabaseProductVersion());
+		   result.setJDBCMajorVersion(String.valueOf(conn.getMetaData().getJDBCMajorVersion()));
+		   result.setJDBCMinorVersion(String.valueOf(conn.getMetaData().getJDBCMinorVersion()));
+		   return result;
+		  }
+		  else{
+		    System.out.println("There is no database metadata info!!"); 
+		  }
+		 }
+		 catch (ClassNotFoundException e) {
+		  e.printStackTrace();
+		 } catch (SQLException e) {
+		  System.out.println("Unable to Connect to Database.");
+		 }
+		 return result;
+		}
+	
+	
+	
 	
 	
 	/*
@@ -376,5 +452,75 @@ public class DatabaseInfo {
 		 
 		 }
 	
-	
+	public List<AddressLocationSearchResultTO> getAddressLocationData(String databaseName,RoadSearchParamsTO roadSearchParamsTO, String propertiesFile) throws Exception{
+		 Statement stmt = null;
+		 ResultSet rs=null;
+		  Connection conn=null;
+		 List<AddressLocationSearchResultTO> dl=new ArrayList<AddressLocationSearchResultTO>();
+		 AddressLocationSearchResultTO databaseInfoResultTO=new AddressLocationSearchResultTO();
+
+		 StringBuilder query=new StringBuilder();
+		 query.append(" SELECT ungeo,thcode,distcode,division,district,upazila ,union_name FROM bd_union WHERE");
+		  
+		 if(roadSearchParamsTO.getDivisionName()!=null) {
+		  query.append(" division like('%"+roadSearchParamsTO.getDivisionName() +"%')");
+		 }
+		 else {
+		  query.append(" division like('%%')");
+		 }
+		  
+		 if(roadSearchParamsTO.getDistrictName()!=null) {
+		  query.append(" AND district like('%"+roadSearchParamsTO.getDistrictName()+"%')");
+		 }
+		 
+		 else {
+		  query.append(" AND district like('%%')");
+		 }
+		  
+		 if(roadSearchParamsTO.getUpzillaName()!=null) {
+		  query.append(" AND upazila like('%"+roadSearchParamsTO.getUpzillaName()+"%')");
+		 }
+		 else {
+		  query.append(" AND upazila like('%%')");
+		 }
+		 
+		 if(roadSearchParamsTO.getUnionName()!=null) {
+		  query.append(" AND union_name like('%"+roadSearchParamsTO.getUnionName()+"%')");
+		 }
+		 else {
+		  query.append(" AND union_name like('%%')");
+		 }
+		  
+		 query.append(" ORDER BY ungeo,district,upazila,union_name");
+		 
+		 
+		 System.out.println("----------Query----------------:"+query.toString());
+
+		 try{
+		      conn=(Connection)getConnection(databaseName,propertiesFile);
+		   stmt=conn.createStatement();
+		   rs=stmt.executeQuery(query.toString());
+		   while(rs.next()){
+		    databaseInfoResultTO=new AddressLocationSearchResultTO();
+		    databaseInfoResultTO.setAddressId(rs.getLong("ungeo"));
+		    databaseInfoResultTO.setThanaCode(rs.getLong("thcode"));
+		    databaseInfoResultTO.setDistictCode(rs.getLong("distcode"));
+		    databaseInfoResultTO.setDivisionName(rs.getString("division"));
+		    databaseInfoResultTO.setDistrictName(rs.getString("district"));
+		    
+		    databaseInfoResultTO.setUpazilaName(rs.getString("upazila"));
+		    databaseInfoResultTO.setUnionName(rs.getString("union_name"));
+		    
+		   
+		    dl.add(databaseInfoResultTO);
+		   }
+		   return dl;
+		  }
+		  finally{
+		   if(conn!=null){conn.close();}
+		   if(stmt!=null){stmt.close();}
+		   if(rs!=null){rs.close();}
+		  }
+		 
+		 }
 }

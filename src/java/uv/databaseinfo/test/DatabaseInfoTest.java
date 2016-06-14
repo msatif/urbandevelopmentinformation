@@ -14,7 +14,7 @@ import uv.databaseinfo.impl.DatabaseInfo;
 public class DatabaseInfoTest {
 	public static void main(String[] args) throws Exception {
 		//readPropertiesFileTestSuite();
-		getConnectionTestSuite();
+		//getConnectionTestSuite();
 		//getDatabaseMetadataInfoTestSuite();
 		//getDatabaseListTestSuite();
 		//getDatabaseCountListTestSuite();
@@ -22,7 +22,7 @@ public class DatabaseInfoTest {
 		//getTableNameListTestSuite();
 		//getTableCountListTestSuite();
 		//getTableNameListTestSuite();
-	//	getDatabaseTableDescriptionTestSuite();
+	getDatabaseTableDescriptionTestSuite();
 	}
 	public static void readPropertiesFileTestSuite(){
 		String propertiesFile = "conf.properties";

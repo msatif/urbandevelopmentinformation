@@ -1,18 +1,70 @@
 package urbandevelopmentinformation
 
 class FloorInfo {
-	Long flooorId;
-	Long buildingId;
-	String floorCode;
-	String floorType;
-	String floorName;
-    static mapping = {
-		table 'floor'
-		flooorId column:'fl_id'
-		buildingId column:'bu_id'
-		floorCode column:'fl_code'
-		floorType column:'fl_type'
-		floorNamecolumn:'fl_name'
+
+	Long flId
+	Long flBuId
+	String flCode
+	String flName
+	String flUseType
+	Double flNumberOfFloorUnit
+	Double flTotalFloorArea
+	Double flTotalFloorHeight
+	Double flCenterLongitude
+	Double flCenterLatitude
+	byte [] flLayoutPicture
+	String flRemark
+	
+	static hasMany =[ownership:FloorInfoOwnershipInfo,authorizationInfo:FloorInfoAuthorizationInfo, utilityInfo:FloorInfoUtilityInfo,
+		billingInfo:FloorInfoBillingInfo, paymentInfo:FloorInfoPaymentInfo, unitInfo:UnitInfo]
+	
+	static belongsTo =[buildingInfo:BuildingInfo]
+	
+	
+    static constraints = {
+		 flId()
+		 flBuId()
+		 flCode()
+		 flName()
+		 flUseType()
+		 flNumberOfFloorUnit()
+		 flTotalFloorArea()
+		 flTotalFloorHeight()
+		 flCenterLongitude()
+		 flCenterLatitude()
+		 flLayoutPicture()
+		 flRemark()
 		
+		ownership()
+		authorizationInfo()
+		utilityInfo()
+		billingInfo()
+		paymentInfo()
+		unitInfo()
     }
+	String toString() {
+		"${flId}-${flBuId}-${flUseType}"
+	}
+	
+	static mapping = {
+		table 'floorInfo'
+		version false
+	   
+   columns {
+	
+		 flId column:'fl_id'
+		 flBuId column:'fl_bu_id'
+		 flName column:'fl_name'
+		 flUseType column:'fl_use_type'
+		 flNumberOfFloorUnit column:'fl_num_fu'
+		 flTotalFloorArea column:'fl_tot_area'
+		 flTotalFloorHeight column:'fl_tot_fh'
+		 flCenterLongitude column:'fl_ce_longitude'
+		 flCenterLatitude column:'fl_ce_latitude'
+		 flLayoutPicture column:'fl_layout_pic'
+		 flRemark column:'fl_remark'
+	  
+		}
+	}
+	
 }

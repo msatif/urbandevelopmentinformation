@@ -1,5 +1,7 @@
 package urbandevelopmentinformation
 
+
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -13,23 +15,52 @@ class UserRegistrationController {
         respond UserRegistration.list(params), model:[userRegistrationInstanceCount: UserRegistration.count()]
     }
  
- def login = {}
+ def loginAdmin = {
  
-  def authenticate = {
-   def user = UserRegistration.findByUserRegistrationNameAndUserRegistrationPassword(params.userRegistrationName, params.userRegistrationPassword)
-   System.out.println("userRegistrationName:" +params.userRegistrationName)
-   if(user){
-    session.user = user
-    flash.message = "Hello ${user.userRegistrationfullName}!"
-   // redirect(action:"login")
-    render(view:'/index')
-   
-   }else{
-   flash.message = "Your user name or password is wrong!"
-   redirect(action:"login")
-   //redirect(action:"create")
-   }
+ }
+
+ def login = {
+  
+ }
+ 
+ 
+ def authenticateWebPortal = {
+  render(view:'/publicApplicationList')
+ }
+ 
+
+ def authenticateWebApplication = {
+  def user = UserRegistration.findByUserRegistrationNameAndUserRegistrationPassword(params.userRegistrationName, params.userRegistrationPassword)
+  
+  if(user){
+   session.user = user
+   flash.message = "Hello ${user.userRegistrationfullName}!"
+  // redirect(action:"login")
+   render(view:'/index')
+  
+  }else{
+  flash.message = "Your user name or password is wrong!"
+  redirect(action:"login")
+  //redirect(action:"create")
   }
+ }
+ 
+ 
+ def authenticateWebAdministrator = {
+  def user = UserRegistration.findByUserRegistrationNameAndUserRegistrationPassword(params.userRegistrationName, params.userRegistrationPassword)
+  
+  if(user){
+   session.user = user
+   flash.message = "Hello ${user.userRegistrationfullName}!"
+  // redirect(action:"login")
+   render(view:'/index2')
+  
+  }else{
+  flash.message = "Your user name or password is wrong!"
+  redirect(action:"loginAdmin")
+  //redirect(action:"create")
+  }
+ }
  
   def logout = {
    flash.message = "Please Login"

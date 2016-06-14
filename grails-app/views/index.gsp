@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta name="layout" content="main"/>
-		<title>Welcome to Grails</title>
+		<title>Welcome to Building Information System</title>
 		<style type="text/css" media="screen">
 			#status {
 				background-color: #eee;
@@ -81,45 +81,103 @@
 		</style>
 	</head>
 	<body>
-	 <h2>System Information</h2>
- <table>
- <tr>
- <td><g:link  controller="systemInfo" action="systemInfo"> <g:message code="system.information.lebel"/></g:link></td>
- <td> <g:link controller="floorInfo" action="index"> <g:message code="floorInfo.information.lebel"/></g:link></td>
-  <td> <g:link controller="floorUnitInfo" action="index"><g:message code="floorUnitInfo.information.lebel"/></g:link></td>
- </tr>
- 
- <tr>
- <td><g:link  controller="addressInfo" action="index"> <g:message code="addressInfo.information.lebel"/></g:link></td>
- <td> <g:link controller="authorizationInfo" action="index"> <g:message code="authorizationInfo.information.lebel"/></g:link></td>
-  <td> <g:link controller="floorUtilityInfo" action="index"> <g:message code="floorUtilityInfo.information.lebel"/></g:link></td>
- </tr>
- 
- <tr>
- <td><g:link  controller="bilingInfo" action="index"><g:message code="bilingInfo.information.lebel"/></g:link></td>
- <td> <g:link controller="buildingInfo" action="index"><g:message code="buildingInfo.information.lebel"/></g:link></td>
-  <td> <g:link controller="contractInfo" action="index"><g:message code="contractInfo.information.lebel"/></g:link></td>
- </tr>
- 
- <tr>
- <td><g:link  controller="invoiceInfo" action="index"><g:message code="invoiceInfo.information.lebel"/></g:link></td>
- <td> <g:link controller="ownerInfo" action="index"> <g:message code="ownerInfo.information.lebel"/></g:link></td>
-  <td> <g:link controller="paymentInfo" action="index"><g:message code="paymentInfo.information.lebel"/></g:link></td>
- </tr>
- 
-  <tr>
- <td><g:link  controller="plotInfo" action="index"><g:message code="plotInfo.information.lebel"/></g:link></td>
- 
- </tr>
- 
- </table>
 	
-		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+	 
+	 <table>
+
+<tr><td><b>User Address</b></td></tr>
+
+<tr>   
+ <td><g:link  controller="addressInfo" action="index"><input type="button" value="<g:message code="addressInfo.information.lebel"/>"></g:link></td>
+ <td><g:link  controller="addressLocationInfo" action="index"><input type="button" value="<g:message code="addressLocationInfo.information.lebel"/>"></g:link></td>
+    
+
+</tr>
+
+</table>  
+
+ <table>
+<tr><td><b>Web Map GIS Applications</b></td></tr>
+  <tr>
+ <td><g:link controller="webmaps" action="geoserverApplication"><input type="button" value="<g:message code="new.geoserverapplication.label"/>"></g:link></td>   
+ <td><g:link controller="webmaps" action="createVectorLayer"><input type="button" value="<g:message code="new.mapapplication.label"/>"></g:link></td>   
+ </tr>
+</table>  
+
+
+
+<table>
+<tr><td><b>Plot Registration</b></td></tr>
+  <tr>
+ <td><g:link  controller="plotInfo" action="index"><input type="button" value="<g:message code="plotInfo.information.lebel"/>"></g:link></td>
+ <td><g:link  controller="plotInfo" action="index"><input type="button" value="<g:message code="ownershipInfo.information.lebel"/>"></g:link></td>
+ <td><g:link  controller="plotInfo" action="index"><input type="button" value="<g:message code="authorizationInfo.information.lebel"/>"></g:link></td>
+ <td><g:link  controller="plotInfo" action="index"><input type="button" value="<g:message code="utilityInfo.information.lebel"/>"></g:link></td>
+ <td><g:link  controller="plotInfo" action="index"><input type="button" value="<g:message code="billingInfo.information.lebel"/>"></g:link></td>
+ <td><g:link  controller="plotInfo" action="index"><input type="button" value="<g:message code="paymentInfo.information.lebel"/>"></g:link></td>
+    
+ 
+ </tr>
+</table>  
+
+
+
+<table>
+<tr><td><b>Building Registration</b></td></tr>
+  <tr>
+ <td><g:link  controller="buildingInfo" action="index"><input type="button" value="<g:message code="buildingInfo.information.lebel"/>"></g:link></td>
+ <td><g:link  controller="buildingInfo" action="index"><input type="button" value="<g:message code="ownershipInfo.information.lebel"/>"></g:link></td>
+ <td><g:link  controller="buildingInfo" action="index"><input type="button" value="<g:message code="authorizationInfo.information.lebel"/>"></g:link></td>
+ <td><g:link  controller="buildingInfo" action="index"><input type="button" value="<g:message code="utilityInfo.information.lebel"/>"></g:link></td>
+ <td><g:link  controller="buildingInfo" action="index"><input type="button" value="<g:message code="billingInfo.information.lebel"/>"></g:link></td>
+ <td><g:link  controller="buildingInfo" action="index"><input type="button" value="<g:message code="paymentInfo.information.lebel"/>"></g:link></td>
+    
+ 
+ </tr>
+</table>  
+
+
+<table>
+<tr><td><b>Floor Registration</b></td></tr>
+  <tr>
+ <td><g:link  controller="floorInfo" action="index"><input type="button" value="<g:message code="floorInfo.information.lebel"/>"></g:link></td>
+ <td><g:link  controller="floorInfo" action="index"><input type="button" value="<g:message code="ownershipInfo.information.lebel"/>"></g:link></td>
+ <td><g:link  controller="floorInfo" action="index"><input type="button" value="<g:message code="authorizationInfo.information.lebel"/>"></g:link></td>
+ <td><g:link  controller="floorInfo" action="index"><input type="button" value="<g:message code="utilityInfo.information.lebel"/>"></g:link></td>
+ <td><g:link  controller="floorInfo" action="index"><input type="button" value="<g:message code="billingInfo.information.lebel"/>"></g:link></td>
+ <td><g:link  controller="floorInfo" action="index"><input type="button" value="<g:message code="paymentInfo.information.lebel"/>"></g:link></td>
+    
+ 
+ </tr>
+</table>  
+
+
+<table>
+<tr><td><b>Unit Registration</b></td></tr>
+  <tr>
+ <td><g:link  controller="unitInfo" action="index"><input type="button" value="<g:message code="unitInfo.information.lebel"/>"></g:link></td>
+ <td><g:link  controller="unitInfo" action="index"><input type="button" value="<g:message code="ownershipInfo.information.lebel"/>"></g:link></td>
+ <td><g:link  controller="unitInfo" action="index"><input type="button" value="<g:message code="authorizationInfo.information.lebel"/>"></g:link></td>
+ <td><g:link  controller="unitInfo" action="index"><input type="button" value="<g:message code="utilityInfo.information.lebel"/>"></g:link></td>
+ <td><g:link  controller="unitInfo" action="index"><input type="button" value="<g:message code="billingInfo.information.lebel"/>"></g:link></td>
+ <td><g:link  controller="unitInfo" action="index"><input type="button" value="<g:message code="paymentInfo.information.lebel"/>"></g:link></td>
+    
+ 
+ </tr>
+</table>  
+
+
+
+
+
+	
+<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a> 
 		
 
-			
+		
 
 			
 		
 	</body>
+	
 </html>

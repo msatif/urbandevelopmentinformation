@@ -1,5 +1,5 @@
 
-<%@ page import="transportationmodel.UserRegistration" %>
+<%@ page import="urbandevelopmentinformation.UserRegistration" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -110,6 +110,17 @@
 					
 						<g:each in="${userRegistrationInstance.roles}" var="r">
 						<span class="property-value" aria-labelledby="roles-label"><g:link controller="userRole" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></span>
+						</g:each>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${userRegistrationInstance?.addresses}">
+				<li class="fieldcontain">
+					<span id="addresses-label" class="property-label"><g:message code="userRegistration.addresses.label" default="Addresses" /></span>
+					
+						<g:each in="${userRegistrationInstance.addresses}" var="a">
+						<span class="property-value" aria-labelledby="addresses-label"><g:link controller="addressInfo" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></span>
 						</g:each>
 					
 				</li>

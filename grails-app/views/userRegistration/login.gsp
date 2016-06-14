@@ -1,4 +1,4 @@
-<%@ page import="transportationmodel.UserRegistration" %>
+<%@ page import="urbandevelopmentinformation.UserRegistration" %>
 <!doctype html>
 <html>
     <head>
@@ -21,7 +21,7 @@
                 </g:eachError>
             </ul>
             </g:hasErrors>
-            <g:form action="authenticate" >
+            <g:form action="authenticateWebApplication" >
                 <fieldset class="form">
                     <div class="fieldcontain ${hasErrors(bean: userRegistrationInstance, field: 'userRegistrationName', 'error')} ">
                         <label for="userRegistrationName">
@@ -41,7 +41,7 @@
                 </fieldset>
                 <fieldset class="buttons">
                     <g:submitButton name="login" class="save" value="Login" />
-                    <g:actionSubmit name="Registration" class="save" action="create" value="New Registration" />
+                  
                 </fieldset>
            
             </g:form>

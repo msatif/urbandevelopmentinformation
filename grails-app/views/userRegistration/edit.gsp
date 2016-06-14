@@ -1,4 +1,4 @@
-<%@ page import="transportationmodel.UserRegistration" %>
+<%@ page import="urbandevelopmentinformation.UserRegistration" %>
 <!DOCTYPE html>
 <html>
 	<head>

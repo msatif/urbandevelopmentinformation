@@ -1,10 +1,10 @@
 
-<%@ page import="transportationmodel.UserRegistration" %>
+<%@ page import="urbandevelopmentinformation.UserRegistration" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'userRegistration.alluser')}" />
+		<g:set var="entityName" value="${message(code: 'userRegistration.label', default: 'UserRegistration')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
 	<body>
